@@ -12,3 +12,15 @@ struct Character: Identifiable, Hashable, Equatable {
     var fontSize: CGFloat = 19
     var isShowing: Bool = false
 }
+
+var characters: [Character] = [
+    Character(value: "Lorem"),
+    Character(value: "Ipsum"),
+    Character(value: "is"),
+    Character(value: "simply"),
+    Character(value: "dummy"),
+    Character(value: "text"),
+    Character(value: "of"),
+    Character(value: "the"),
+    Character(value: "design")
+]

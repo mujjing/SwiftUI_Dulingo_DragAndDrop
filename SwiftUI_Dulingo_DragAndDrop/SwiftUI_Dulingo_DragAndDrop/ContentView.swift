@@ -1,15 +1,14 @@
 //
 //  ContentView.swift
-//  SwiftUI_Dulingo_DragAndDrop
-//
-//  Created by 전지훈 on 2022/12/02.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Home()
+        ScrollView(.vertical, showsIndicators: false) {
+            Home()
+        }
     }
 }
 

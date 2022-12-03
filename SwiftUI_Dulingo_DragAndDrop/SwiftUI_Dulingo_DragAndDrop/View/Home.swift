@@ -6,7 +6,25 @@ import SwiftUI
 
 struct Home: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 15) {
+            navBar()
+        }
+        .padding()
+    }
+}
+
+extension Home {
+    //MARK: Custom Nav Bar
+    func navBar() -> some View{
+        HStack(spacing: 18) {
+            Button {
+                
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.title3)
+                    .foregroundColor(.gray)
+            }
+        }
     }
 }
 
