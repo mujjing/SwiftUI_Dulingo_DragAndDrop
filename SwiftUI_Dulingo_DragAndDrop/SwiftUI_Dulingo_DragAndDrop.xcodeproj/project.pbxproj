@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DBA5DF11293B9AFC00B3C013 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5DF10293B9AFC00B3C013 /* Character.swift */; };
+		DBA5DF13293B9B6D00B3C013 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5DF12293B9B6D00B3C013 /* Home.swift */; };
 		DBC566F6293A479000959A56 /* SwiftUI_Dulingo_DragAndDropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC566F5293A479000959A56 /* SwiftUI_Dulingo_DragAndDropApp.swift */; };
 		DBC566F8293A479000959A56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC566F7293A479000959A56 /* ContentView.swift */; };
 		DBC566FA293A479200959A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBC566F9293A479200959A56 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DBA5DF10293B9AFC00B3C013 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		DBA5DF12293B9B6D00B3C013 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		DBC566F2293A479000959A56 /* SwiftUI_Dulingo_DragAndDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI_Dulingo_DragAndDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBC566F5293A479000959A56 /* SwiftUI_Dulingo_DragAndDropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Dulingo_DragAndDropApp.swift; sourceTree = "<group>"; };
 		DBC566F7293A479000959A56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +36,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DBA5DF0E293B9AE400B3C013 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DBA5DF12293B9B6D00B3C013 /* Home.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DBA5DF0F293B9AEC00B3C013 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DBA5DF10293B9AFC00B3C013 /* Character.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DBC566E9293A479000959A56 = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +71,8 @@
 		DBC566F4293A479000959A56 /* SwiftUI_Dulingo_DragAndDrop */ = {
 			isa = PBXGroup;
 			children = (
+				DBA5DF0F293B9AEC00B3C013 /* Model */,
+				DBA5DF0E293B9AE400B3C013 /* View */,
 				DBC566F5293A479000959A56 /* SwiftUI_Dulingo_DragAndDropApp.swift */,
 				DBC566F7293A479000959A56 /* ContentView.swift */,
 				DBC566F9293A479200959A56 /* Assets.xcassets */,
@@ -137,7 +159,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBA5DF11293B9AFC00B3C013 /* Character.swift in Sources */,
 				DBC566F8293A479000959A56 /* ContentView.swift in Sources */,
+				DBA5DF13293B9B6D00B3C013 /* Home.swift in Sources */,
 				DBC566F6293A479000959A56 /* SwiftUI_Dulingo_DragAndDropApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
