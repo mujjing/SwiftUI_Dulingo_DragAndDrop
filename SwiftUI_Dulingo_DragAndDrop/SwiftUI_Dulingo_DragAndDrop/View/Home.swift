@@ -16,13 +16,23 @@ struct Home: View {
 extension Home {
     //MARK: Custom Nav Bar
     func navBar() -> some View{
-        HStack(spacing: 18) {
-            Button {
+        ZStack {
+            HStack(spacing: 18) {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.title3)
+                        .foregroundColor(.gray)
+                }
                 
-            } label: {
-                Image(systemName: "xmark")
-                    .font(.title3)
-                    .foregroundColor(.gray)
+                GeometryReader { geo in
+                    ZStack {
+                        Capsule()
+                            .fill(.gray.opacity(0.25))
+                    }
+                }
+                .frame(height: 20)
             }
         }
     }
