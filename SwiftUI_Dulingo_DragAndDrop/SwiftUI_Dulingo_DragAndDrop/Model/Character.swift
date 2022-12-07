@@ -13,7 +13,7 @@ struct Character: Identifiable, Hashable, Equatable {
     var isShowing: Bool = false
 }
 
-var characters: [Character] = [
+var characters_: [Character] = [
     Character(value: "Lorem"),
     Character(value: "Ipsum"),
     Character(value: "is"),

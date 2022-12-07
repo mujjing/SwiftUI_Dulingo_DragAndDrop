@@ -7,10 +7,10 @@ import SwiftUI
 struct Home: View {
     //MARK: Properties
     @State var progress: CGFloat = 0
-    @State var characters: [Character] = characters
+    @State var charactersArr: [Character] = characters_
     
     //MARK: Custom Grid Arrays
-    @State var suffledArray: [[Character]] = [[]]
+    @State var suffledRows: [[Character]] = [[]]
     @State var rows: [[Character]] = [[]]
     
     var body: some View {
@@ -31,6 +31,14 @@ struct Home: View {
             //MARK: Drag And Drop Space
         }
         .padding()
+        .onAppear {
+            if rows.isEmpty {
+                charactersArr = charactersArr.shuffled()
+                suffledRows = generatGrid()
+                charactersArr = characters_
+                rows = generatGrid()
+            }
+        }
     }
 }
 
@@ -77,6 +85,47 @@ extension Home {
             }
         }
     }
+    
+    //MARK: Generating Custom Grid Columns
+    func generatGrid() -> [[Character]] {
+        for item in charactersArr.enumerated() {
+            let textSize = textSize(data: item.element)
+            charactersArr[item.offset].textSize = textSize
+        }
+        
+        var gridArray: [[Character]] = [[]]
+        var tempArray: [Character] = []
+        
+        var currentWidth: CGFloat = 0
+        let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 30
+        
+        for character in charactersArr {
+            currentWidth += character.textSize
+            
+            if currentWidth < totalScreenWidth {
+                tempArray.append(character)
+            } else {
+                gridArray.append(tempArray)
+                tempArray = []
+                currentWidth = character.textSize
+                tempArray.append(character)
+            }
+        }
+        
+        if !tempArray.isEmpty {
+            gridArray.append(tempArray)
+        }
+        
+        return gridArray
+    }
+    
+    func textSize(data: Character) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: data.fontSize)
+        let attributes = [NSAttributedString.Key.font : font]
+        let size = (data.value as NSString).size(withAttributes: attributes)
+        return size.width * (data.padding * 2)
+    }
+    
 }
 
 struct Home_Previews: PreviewProvider {
