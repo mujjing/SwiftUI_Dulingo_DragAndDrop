@@ -29,6 +29,7 @@ struct Home: View {
             .padding(.top, 30)
             
             //MARK: Drag And Drop Space
+            dragArea()
         }
         .padding()
         .onAppear {
@@ -46,7 +47,13 @@ extension Home {
     func dragArea() -> some View {
         ZStack {
             VStack(spacing: 12) {
-                
+                ForEach(suffledRows, id: \.self) { row in
+                    HStack(spacing: 10) {
+                        ForEach(row) { item in
+                            Text(item.value)
+                        }
+                    }
+                }
             }
         }
     }
