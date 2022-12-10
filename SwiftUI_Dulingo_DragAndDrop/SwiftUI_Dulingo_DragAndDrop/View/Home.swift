@@ -7,11 +7,11 @@ import SwiftUI
 struct Home: View {
     //MARK: Properties
     @State var progress: CGFloat = 0
-    @State var charactersArr: [Character] = characters_
+    @State var characters: [Character] = characters_
     
     //MARK: Custom Grid Arrays
-    @State var suffledRows: [[Character]] = [[]]
-    @State var rows: [[Character]] = [[]]
+    @State var suffledRows: [[Character]] = []
+    @State var rows: [[Character]] = []
     
     var body: some View {
         VStack(spacing: 15) {
@@ -34,9 +34,9 @@ struct Home: View {
         .padding()
         .onAppear {
             if rows.isEmpty {
-                charactersArr = charactersArr.shuffled()
+                characters = characters.shuffled()
                 suffledRows = generatGrid()
-                charactersArr = characters_
+                characters = characters_
                 rows = generatGrid()
             }
         }
@@ -51,6 +51,13 @@ extension Home {
                     HStack(spacing: 10) {
                         ForEach(row) { item in
                             Text(item.value)
+                                .font(.system(size: item.fontSize))
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, item.padding)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                        .stroke(.gray)
+                                }
                         }
                     }
                 }
@@ -95,9 +102,9 @@ extension Home {
     
     //MARK: Generating Custom Grid Columns
     func generatGrid() -> [[Character]] {
-        for item in charactersArr.enumerated() {
+        for item in characters.enumerated() {
             let textSize = textSize(data: item.element)
-            charactersArr[item.offset].textSize = textSize
+            characters[item.offset].textSize = textSize
         }
         
         var gridArray: [[Character]] = [[]]
@@ -106,7 +113,7 @@ extension Home {
         var currentWidth: CGFloat = 0
         let totalScreenWidth: CGFloat = UIScreen.main.bounds.width - 30
         
-        for character in charactersArr {
+        for character in characters {
             currentWidth += character.textSize
             
             if currentWidth < totalScreenWidth {
