@@ -29,6 +29,8 @@ struct Home: View {
             .padding(.top, 30)
             
             //MARK: Drag And Drop Space
+            dropArea()
+                .padding(.bottom, 30)
             dragArea()
         }
         .padding()
@@ -44,6 +46,38 @@ struct Home: View {
 }
 
 extension Home {
+    //MARK: drop Area
+    func dropArea() -> some View {
+        ZStack {
+            VStack(spacing: 12) {
+                ForEach($rows, id: \.self) { $row in
+                    HStack(spacing: 10) {
+                        ForEach($row) { $item in
+                            Text(item.value)
+                                .font(.system(size: item.fontSize))
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, item.padding)
+                                .opacity(item.isShowing ? 1 : 0)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                        .fill(item.isShowing ? .clear : .gray.opacity(0.25))
+                                }
+                                .background {
+                                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                        .stroke(.gray)
+                                        .opacity(item.isShowing ? 1 : 0)
+                                }
+                        }
+                    }
+                    
+                    if rows.last != row {
+                        Divider()
+                    }
+                }
+            }
+        }
+    }
+    //MARK: drag Area
     func dragArea() -> some View {
         ZStack {
             VStack(spacing: 12) {
@@ -58,7 +92,18 @@ extension Home {
                                     RoundedRectangle(cornerRadius: 6, style: .continuous)
                                         .stroke(.gray)
                                 }
+                                .opacity(item.isShowing ? 0 : 1)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                        .fill(item.isShowing ? .gray.opacity(0.25) : .clear)
+                                }
+                                .onDrag {
+                                    return .init(contentsOf: URL(string: item.id))!
+                                }
                         }
+                    }
+                    if suffledRows.last != row {
+                        Divider()
                     }
                 }
             }
@@ -137,7 +182,7 @@ extension Home {
         let font = UIFont.systemFont(ofSize: data.fontSize)
         let attributes = [NSAttributedString.Key.font : font]
         let size = (data.value as NSString).size(withAttributes: attributes)
-        return size.width * (data.padding * 2)
+        return size.width + (data.padding * 2) + 15
     }
     
 }
