@@ -67,6 +67,12 @@ extension Home {
                                         .stroke(.gray)
                                         .opacity(item.isShowing ? 1 : 0)
                                 }
+                                .onDrop(of: [.url], isTargeted: .constant(false)) { providers in
+                                    if let provider = providers.first {
+                                        
+                                    }
+                                    return providers
+                                }
                         }
                     }
                     
@@ -92,13 +98,13 @@ extension Home {
                                     RoundedRectangle(cornerRadius: 6, style: .continuous)
                                         .stroke(.gray)
                                 }
+                                .onDrag {
+                                    return .init(contentsOf: URL(string: item.id))!
+                                }
                                 .opacity(item.isShowing ? 0 : 1)
                                 .background {
                                     RoundedRectangle(cornerRadius: 6, style: .continuous)
                                         .fill(item.isShowing ? .gray.opacity(0.25) : .clear)
-                                }
-                                .onDrag {
-                                    return .init(contentsOf: URL(string: item.id))!
                                 }
                         }
                     }
