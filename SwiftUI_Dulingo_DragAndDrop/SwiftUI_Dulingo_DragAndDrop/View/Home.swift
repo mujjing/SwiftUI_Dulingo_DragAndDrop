@@ -68,10 +68,15 @@ extension Home {
                                         .opacity(item.isShowing ? 1 : 0)
                                 }
                                 .onDrop(of: [.url], isTargeted: .constant(false)) { providers in
-                                    if let provider = providers.first {
-                                        
+                                    if let first = providers.first {
+                                        let _ = first.loadObject(ofClass: URL.self) { value, error in
+                                            guard let url = value else { return }
+                                            if item.id == "\(url)" {
+                                                item.isShowing = true
+                                            }
+                                        }
                                     }
-                                    return providers
+                                    return false
                                 }
                         }
                     }
