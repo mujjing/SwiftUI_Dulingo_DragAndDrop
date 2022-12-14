@@ -13,6 +13,9 @@ struct Home: View {
     @State var suffledRows: [[Character]] = []
     @State var rows: [[Character]] = []
     
+    //MARK: Animation
+    @State var animateWrongText: Bool = false
+    
     var body: some View {
         VStack(spacing: 15) {
             navBar()
@@ -72,7 +75,13 @@ extension Home {
                                         let _ = first.loadObject(ofClass: URL.self) { value, error in
                                             guard let url = value else { return }
                                             if item.id == "\(url)" {
-                                                item.isShowing = true
+                                                withAnimation {
+                                                    item.isShowing = true
+                                                    updatedShuffledArray(data: item)
+                                                }
+                                            } else {
+                                                //Animating When Wrong Text Dropped
+                                                animateText()
                                             }
                                         }
                                     }
@@ -196,6 +205,21 @@ extension Home {
         return size.width + (data.padding * 2) + 15
     }
     
+    //MARK: Updatind Shuffled Array
+    func updatedShuffledArray(data: Character) {
+        for index in suffledRows.indices {
+            for subIndex in suffledRows[index].indices {
+                if suffledRows[index][subIndex].id == data.id {
+                    suffledRows[index][subIndex].isShowing = true
+                }
+            }
+        }
+    }
+    
+    //MARK: Animating View When Wrong Text Dropped
+    func animateText() {
+        
+    }
 }
 
 struct Home_Previews: PreviewProvider {
