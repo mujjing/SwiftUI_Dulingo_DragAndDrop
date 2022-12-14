@@ -15,6 +15,7 @@ struct Home: View {
     
     //MARK: Animation
     @State var animateWrongText: Bool = false
+    @State var droppedCount: CGFloat = 0
     
     var body: some View {
         VStack(spacing: 15) {
@@ -45,6 +46,7 @@ struct Home: View {
                 rows = generatGrid()
             }
         }
+        .offset(x: animateWrongText ? -30 : 0)
     }
 }
 
@@ -75,9 +77,12 @@ extension Home {
                                         let _ = first.loadObject(ofClass: URL.self) { value, error in
                                             guard let url = value else { return }
                                             if item.id == "\(url)" {
+                                                droppedCount += 1
+                                                let progress = (droppedCount / CGFloat(characters.count))
                                                 withAnimation {
                                                     item.isShowing = true
                                                     updatedShuffledArray(data: item)
+                                                    self.progress = progress
                                                 }
                                             } else {
                                                 //Animating When Wrong Text Dropped
@@ -143,7 +148,7 @@ extension Home {
                 }
                 
                 GeometryReader { geo in
-                    ZStack {
+                    ZStack(alignment: .leading) {
                         Capsule()
                             .fill(.gray.opacity(0.25))
                         
@@ -218,7 +223,15 @@ extension Home {
     
     //MARK: Animating View When Wrong Text Dropped
     func animateText() {
+        withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.2, blendDuration: 0.2)) {
+            animateWrongText = true
+        }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.2, blendDuration: 0.2)) {
+                animateWrongText = false
+            }
+        }
     }
 }
 
